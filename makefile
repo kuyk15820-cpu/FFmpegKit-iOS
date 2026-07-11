@@ -33,7 +33,7 @@ $(APPLICATION_NAME)_CCFLAGS += -std=c++17 -fno-rtti -DNDEBUG -Wall -Wno-deprecat
 # [แก้ไข] เปลี่ยน -F. เป็น -F./deps เพื่อให้ลิงก์ผ่านโฟลเดอร์ deps
 $(APPLICATION_NAME)_LDFLAGS += -lstdc++ -undefined dynamic_lookup -F./deps -Wl,-rpath,@executable_path/Frameworks
 
-$(APPLICATION_NAME)_FRAMEWORKS += UIKit Foundation CoreGraphics QuartzCore Security AVFoundation AudioToolbox CoreMedia MobileCoreServices SystemConfiguration ImageIO WebKit UniformTypeIdentifiers PhotosUI
+$(APPLICATION_NAME)_FRAMEWORKS += UIKit Foundation CoreGraphics QuartzCore Security AVFoundation AudioToolbox CoreMedia MobileCoreServices SystemConfiguration ImageIO WebKit UniformTypeIdentifiers PhotosUI CoreText
 
 # ประกาศเพิ่ม EXTRA_FRAMEWORKS เพื่อดึง ffmpegkit และ lottie เข้ามาลิงก์ตอนบิลด์
 $(APPLICATION_NAME)_EXTRA_FRAMEWORKS += ffmpegkit Lottie
