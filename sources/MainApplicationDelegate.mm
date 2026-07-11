@@ -1,3 +1,4 @@
+#import <CoreText/CoreText.h>
 #import "MainApplicationDelegate.h"
 #import "RootViewController.h"
 #import <Lottie/Lottie-Swift.h>
@@ -25,22 +26,25 @@
     [self.window makeKeyAndVisible];
 
     // เริ่มต้นเรียกใช้ Lottie Animation View ในฐานะ Splash Screen
-    LottieAnimationView *animationView = [[LottieAnimationView alloc] initWithName:@"splash" bundle:[NSBundle mainBundle]];
-    if (animationView) {
-        animationView.frame = self.window.bounds;
-        animationView.contentMode = UIViewContentModeScaleAspectFit;
-        
-        // บังคับให้อยู่บนสุดของ Window ชั่วคราว
-        [self.window addSubview:animationView];
-        
-        // เล่นแอนิเมชันจนจบแล้วค่อยๆ Fade Out ออกเพื่อแสดงหน้า RootViewController
-        [animationView playWithCompletion:^(BOOL animationFinished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                animationView.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                [animationView removeFromSuperview];
+    LottieAnimation *animation = [LottieAnimation named:@"splash" bundle:[NSBundle mainBundle] subdirectory:nil animationCache:nil];
+    if (animation) {
+        LottieAnimationView *animationView = [[LottieAnimationView alloc] initWithAnimation:animation configuration:[LottieConfiguration shared]];
+        if (animationView) {
+            animationView.frame = self.window.bounds;
+            animationView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            // บังคับให้อยู่บนสุดของ Window ชั่วคราว
+            [self.window addSubview:animationView];
+            
+            // เล่นแอนิเมชันจนจบแล้วค่อยๆ Fade Out ออกเพื่อแสดงหน้า RootViewController
+            [animationView playWithCompletion:^(BOOL animationFinished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    animationView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    [animationView removeFromSuperview];
+                }];
             }];
-        }];
+        }
     }
 
     return YES;
