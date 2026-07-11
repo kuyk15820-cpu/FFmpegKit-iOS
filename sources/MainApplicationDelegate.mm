@@ -26,9 +26,9 @@
     [self.window makeKeyAndVisible];
 
     // เริ่มต้นเรียกใช้ Lottie Animation View ในฐานะ Splash Screen
-    LottieAnimation *animation = [LottieAnimation named:@"splash" bundle:[NSBundle mainBundle] subdirectory:nil animationCache:nil];
+    CompatibleAnimation *animation = [CompatibleAnimation named:@"splash"];
     if (animation) {
-        LottieAnimationView *animationView = [[LottieAnimationView alloc] initWithAnimation:animation configuration:[LottieConfiguration shared]];
+        CompatibleAnimationView *animationView = [[CompatibleAnimationView alloc] initWithCompatibleAnimation:animation];
         if (animationView) {
             animationView.frame = self.window.bounds;
             animationView.contentMode = UIViewContentModeScaleAspectFit;
